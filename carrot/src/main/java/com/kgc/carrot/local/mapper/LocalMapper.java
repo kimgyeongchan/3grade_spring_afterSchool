@@ -1,5 +1,6 @@
 package com.kgc.carrot.local.mapper;
 
+import com.kgc.carrot.local.model.LocalDetailDto;
 import com.kgc.carrot.local.model.LocalDto;
 import org.apache.ibatis.annotations.*;
 
@@ -43,4 +44,7 @@ public interface LocalMapper {
             WHERE id = #{id};
             """)
     void setById(LocalDto localDto);
+
+    //xml 방식으로 Local테이블 User테이블 조인
+    List<LocalDetailDto> findAllLocalWithUsers();
 }

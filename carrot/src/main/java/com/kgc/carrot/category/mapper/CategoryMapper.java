@@ -1,7 +1,9 @@
 package com.kgc.carrot.category.mapper;
 
 
+import com.kgc.carrot.category.model.CategoryDetailDto;
 import com.kgc.carrot.category.model.CategoryDto;
+import com.kgc.carrot.local.model.LocalDetailDto;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -34,4 +36,7 @@ public interface CategoryMapper {
             delete from category where id = #{id};
             """)
     void deleteCategory(Long id);
+
+    //xml 방식으로 Local테이블 User테이블 조인
+    List<CategoryDetailDto> getTitlePostWithCategory();
 }

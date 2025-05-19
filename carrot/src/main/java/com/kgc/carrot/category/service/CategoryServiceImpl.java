@@ -1,6 +1,7 @@
 package com.kgc.carrot.category.service;
 
 import com.kgc.carrot.category.mapper.CategoryMapper;
+import com.kgc.carrot.category.model.CategoryDetailDto;
 import com.kgc.carrot.category.model.CategoryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> getCategoryAll() {
         return categoryMapper.findAll();
+    }
+
+    @Override
+    public List<CategoryDetailDto> getPostWithCategory() {
+        return categoryMapper.getTitlePostWithCategory();
     }
 
     @Override

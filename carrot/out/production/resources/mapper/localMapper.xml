@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.carrot.post.mapper.PostMapper">
+
+    <resultMap id="PostLocalMap" type="com.kgc.carrot.post.model.PostLocalDetailDto">
+        <id property="id" column="id"/>
+        <result property="city" column="city"/>
+        <result property="district" column="district"/>
+        <result property="neighborhood" column="neighborhood"/>
+        <collection property="posts" ofType="com.kgc.carrot.local.model.LocalPostDto">
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+
+    <!--    카테고리별 조회-->
+    <select id="findPostWithLocal" resultMap="PostLocalMap">
+        select p.id, l.city, l.district, l.neighborhood, p.title
+        from local l
+        inner join user u on u.local_id = l.id
+        left join post p on p.user_id = u.id;
+    </select>
+</mapper>

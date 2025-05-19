@@ -1,9 +1,9 @@
 package com.kgc.carrot.local.service;
 
 import com.kgc.carrot.local.mapper.LocalMapper;
+import com.kgc.carrot.local.model.LocalDetailDto;
 import com.kgc.carrot.local.model.LocalDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +18,12 @@ public class LocalServiceImpl implements LocalService{
     @Override
     public List<LocalDto> getLocalAll() {
         return localMapper.findAll();
+    }
+
+    //지역별 유저 조회
+    @Override
+    public List<LocalDetailDto> getAllLocalWithUsers() {
+        return localMapper.findAllLocalWithUsers();
     }
 
     @Override

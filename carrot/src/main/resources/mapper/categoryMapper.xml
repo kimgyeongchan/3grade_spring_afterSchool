@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.carrot.category.mapper.CategoryMapper">
+
+    <resultMap id="PostCategoryMap" type="com.kgc.carrot.category.model.CategoryDetailDto">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="posts" ofType="com.kgc.carrot.post.model.PostCategoryDto">
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+
+    <!--    카테고리별 조회-->
+    <select id="getTitlePostWithCategory" resultMap="PostCategoryMap">
+        select c.id, c.name,  p.title
+        from category c
+        left join post p on c.id = p.category_id;
+    </select>
+</mapper>

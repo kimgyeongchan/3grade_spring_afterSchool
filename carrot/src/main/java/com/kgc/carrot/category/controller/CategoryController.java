@@ -1,5 +1,6 @@
 package com.kgc.carrot.category.controller;
 
+import com.kgc.carrot.category.model.CategoryDetailDto;
 import com.kgc.carrot.category.model.CategoryDto;
 import com.kgc.carrot.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,11 @@ public class CategoryController {
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id){
         categoryService.deleteCategory(id);
         return ResponseEntity.ok("삭제됐음");
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> detailCategory() {
+        List<CategoryDetailDto> postWithCategory = categoryService.getPostWithCategory();
+        return ResponseEntity.ok(postWithCategory);
     }
 }

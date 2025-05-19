@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.carrot.local.mapper.LocalMapper">
+
+<!--    resultMap 형식으로 커스텀 하기-->
+<!--    type 속성은 resultMap의 Dto를 넣어준다-->
+<!--    oftype 속성은 collection태그 안에서 dto를 넣어준다-->
+<!--    property 속성은 java의 객체 변수명 (카멜)-->
+<!--    column 속성은 SQL에서 컬럼명 (스네이크)-->
+    <resultMap id="LocalUserMap" type="LocalDetailDto">
+        <id property="id" column="id"/>
+        <result property="city" column="city"/>
+        <result property="district" column="district"/>
+        <result property="neighborhood" column="neighborhood"/>
+        <collection property="users" ofType="LocalUserDto">
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+        </collection>
+    </resultMap>
+
+<!--    지역별 전체 조회-->
+    <select id="findAllLocalWithUsers" resultMap="LocalUserMap">
+        select
+        l.id,
+        l.city,
+        l.district,
+        l.neighborhood,
+        u.email,
+        u.name
+        from local l
+        inner join user u on l.id = u.local_id;
+    </select>
+
+
+</mapper>
